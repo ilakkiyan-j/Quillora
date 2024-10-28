@@ -1,0 +1,224 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, #003135, #024950);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.container {
+    background-color: white;
+    border-radius: 1.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    padding: 2rem;
+    width: 100%;
+    max-width: 28rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.background-shape {
+    position: absolute;
+    background-color: #964734;
+    opacity: 0.1;
+    border-radius: 50%;
+}
+
+.background-shape-1 {
+    width: 16rem;
+    height: 16rem;
+    top: -8rem;
+    right: -8rem;
+    animation: rotate 20s linear infinite;
+}
+
+.background-shape-2 {
+    width: 24rem;
+    height: 24rem;
+    bottom: -12rem;
+    left: -12rem;
+    animation: rotate 25s linear infinite reverse;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 10;
+}
+
+.logo svg {
+    width: 4rem;
+    height: 4rem;
+    color: #964734;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+}
+
+h2 {
+    margin-top: 1.5rem;
+    font-size: 2.25rem;
+    font-weight: bold;
+    color: #003135;
+}
+
+p {
+    margin-top: 0.5rem;
+    font-size: 1.125rem;
+    color: #024950;
+}
+
+.tabs {
+    display: flex;
+    background-color: #e0f2f1;
+    border-radius: 9999px;
+    padding: 0.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.tab {
+    flex: 1;
+    text-align: center;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 9999px;
+    transition: background-color 0.3s;
+}
+
+.tab.active {
+    background-color: white;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.form-container {
+    position: relative;
+    min-height: 12rem;
+}
+
+.form {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.5s ease-in-out;
+    pointer-events: none;
+}
+
+.form.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+}
+
+.input-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #003135;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 1px solid #ccc;
+    border-radius: 9999px;
+    font-size: 1.125rem;
+    outline: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #964734;
+}
+
+.input-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #964734;
+}
+
+button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #964734;
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    font-size: 1.125rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button:hover {
+    background-color: #024950;
+}
+
+.button-icon {
+    margin-left: 0.5rem;
+}
+
+#remember-me {
+    margin-right: 0.5rem;
+}
+
+a {
+    color: #964734;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #024950;
+}
+
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  
+  .flex-container a {
+    font-size: 0.875rem;
+    color: #964734;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  .flex-container a:hover {
+    color: #024950;
+  }
+  
+  #back-to-home {
+    color: #003135;
+  }
+  
+  #back-to-home:hover {
+    color: #024950;
+  }

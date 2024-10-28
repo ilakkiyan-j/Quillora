@@ -1,0 +1,80 @@
+<link rel="stylesheet" href="styles/header.css">
+<link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap" rel="stylesheet">
+<header class="d-flex flex-wrap justify-content-center py-3 header ml-lg-5 ml-4 ml-3">
+  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto ms-5 text-decoration-none link-body-emphasis"> 
+      <h1 class="logo">Quillora</h1>
+  </a>
+  <ul class="nav nav-pills align-items-center text-white">
+      <li class="nav-item mx-2 nav-items">
+          <a href="/" class="nav-link text-white">Home</a>
+      </li>
+      <li class="nav-item mx-2 nav-items">
+          <a href="/explore" class="nav-link text-white" id="explore-link">Explore</a>
+      </li>
+      <li class="nav-item mx-2 nav-items">
+          <a href="/dashboard" class="nav-link text-white" id="dashboard-link">Dashboard</a>
+      </li>
+      <li class="nav-item mx-2 nav-items">
+          <a href="/aboutUs" class="nav-link text-white">About Us</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link profile-icon" href="#" id="profile-link">
+              <img src="assets/user-icon.png" alt="Profile" class="rounded-circle" width="50" id="profile-pic">
+          </a>
+      </li>
+  </ul>
+</header>
+
+<script>
+    // Get the user object from the server-side rendered data
+    var user = <%- JSON.stringify(user || null) %>;
+
+    // Get the elements for profile link and profile picture
+    const profileLink = document.getElementById("profile-link");
+    const profilePic = document.getElementById("profile-pic");
+    
+    // Get the explore and dashboard links
+    const exploreLink = document.getElementById("explore-link");
+    const dashboardLink = document.getElementById("dashboard-link");
+
+    if (!user) {
+        // If user is not logged in, point the profile link to sign-in page
+        profileLink.href = "/signin";
+        profilePic.src = "assets/user-icon.png";  // Set default icon
+        profilePic.title = "Guest";  // Display "Guest" when hovering
+
+        // Disable explore and dashboard links
+        exploreLink.onclick = function(event) {
+            event.preventDefault(); // Prevent the default link action
+            alert("You need to sign in to access this page."); // Alert message
+        };
+        dashboardLink.onclick = function(event) {
+            event.preventDefault(); // Prevent the default link action
+            alert("You need to sign in to access this page."); // Alert message
+        };
+
+        // Optionally, style the links to look disabled
+        exploreLink.classList.add("disabled-link");
+        dashboardLink.classList.add("disabled-link");
+    } else {
+        // If user is logged in, point the profile link to user's profile
+        profileLink.href = "#";
+        profilePic.title = user.user_name || "Profile"; // Display username when hovering
+
+        if (user.photo) {
+            // Use the base64-encoded photo from the server
+            profilePic.src = `data:image/jpeg;base64,${user.photo}`;
+        } else {
+            // If no photo, use default icon
+            profilePic.src = "assets/user-icon.png";  
+        }
+    }
+</script>
+
+<style>
+    .disabled-link {
+        pointer-events: none; /* Disable pointer events */
+        color: #ccc; /* Change color to indicate disabled state */
+        text-decoration: line-through; /* Optional: line-through style */
+    }
+</style>

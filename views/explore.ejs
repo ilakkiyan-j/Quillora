@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quillora - Explore</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/explore.css">
+</head>
+<body class="bg-dark text-white">
+    <%- include("partials/header.ejs") %>
+    <div class="container py-5 explore-container">
+        <h1 class="display-4 mb-5 text-center">Explore</h1>
+
+        <!-- Search bar section -->
+        <div class="mb-5 search-bar">
+            <form action="/search" method="GET" class="input-group">
+                <input type="text" name="search" id="search-input" class="form-control bg-white text-black border-secondary" placeholder="Search">
+                <button type="submit" id="search-button" class="btn btn-outline-light">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </button>
+            </form>
+        </div>
+
+        <!-- Authors section -->
+        <div class="mb-5 transparent-card">
+            <h2 class="h3 mb-4">Authors</h2>
+            <div class="row g-3">
+                <% authors.forEach(function(item) { %>
+                    <div class="col-6 col-md-3">
+                        <a href="/search?author=<%= encodeURIComponent(item.author) %>" class="btn btn-outline-light w-100"><%= item.author %></a>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+
+        <!-- Genre section -->
+        <div class="mb-5 transparent-card">
+            <h2 class="h3 mb-4">Genre</h2>
+            <div class="row g-3">
+                <% genres.forEach(function(item) { %>
+                    <div class="col-6 col-md-3">
+                        <a href="/search?genre=<%= encodeURIComponent(item.genre) %>" class="btn btn-outline-light w-100"><%= item.genre %></a>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+
+        <!-- Popular writers section -->
+        <div class="mb-5 transparent-card">
+            <h2 class="h3 mb-4">Our popular writers</h2>
+            <div class="row g-3">
+                <% users.forEach(function(item) { %>
+                    <div class="col-6 col-md-3">
+                        <a href="/search?user_name=<%= encodeURIComponent(item.user_name) %>" class="btn btn-outline-light w-100"><%= item.user_name %></a>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+    <%- include("partials/footer.ejs") %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

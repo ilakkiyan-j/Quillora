@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Dashboard - Quillora</title>
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <%-include("partials/header.ejs")%>
+    <div class="dashboard pt-5">
+        <h1 class="white">Your Dashboard</h1>
+        
+        <div class="profile-card">
+            <h2>Your Profile</h2>
+            <div class="profile-content">
+                <div class="avatar">
+                    <img src="<%= user && user.photo ? 'data:image/jpeg;base64,' + user.photo : 'assets/user-icon.png' %>" alt="Profile"   id="profile-pic">
+                </div>
+                
+                <div class="profile-info">
+                    <h3><%= user ? user.user_name : 'Guest' %></h3>
+                    <p><%= user ? user.email : 'Not available' %></p>
+                    <p><%= user ? user.phone_no : 'Not available' %></p>
+                    <p><%= user ? user.place : 'Not available' %></p>
+                </div>
+            </div>
+            <p class="bio"><%= user ? user.bio : 'No bio available' %></p>
+            <form action="/edit" method="get" style="display: inline;">
+            <button class="edit-profile" <%= user ? '' : 'disabled' %>>Edit Profile</button>
+        </form>
+        </div>
+        
+
+        <div class="notes-section">
+            <div class="tabs">
+                <button class="tab active" data-tab="active">Active Notes</button>
+                <button class="tab" data-tab="archived">Archived Notes</button>
+            </div>
+            
+            <div id="activeNotes" class="tab-content active">
+                <% if (notes && notes.length > 0) { %>
+                    <% notes.forEach(function(item) { %>
+                    <div class="note-card">
+                        <h3><%= item.book_name %></h3>
+                        <p class="author">by <%= item.author %></p>
+                        <p class="last-edited">last updated on <%= new Date(item.last_updated).toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' }) %></p>
+                        <div class="note-actions">
+                            <button onclick="updateNote('<%= item.id %>')">Update Note</button>
+                            <button class="delete" data-post-id="<%= item.id %>" onclick="confirmDelete(this)">Delete</button>
+                        </div>
+                    </div>
+                    <% }) %>
+                <% } else { %>
+                    <p>No archived notes available.</p>
+                <% } %>
+            </div>
+            
+
+            <div id="archivedNotes" class="tab-content">
+                <% if (archives && archives.length > 0) { %> 
+                    <% archives.forEach(function(item) { %>
+                        <div class="archived-note-card mb-4" data-post-id="<%= item.post_id %>">
+                            <h3><%= item.book_name %></h3>
+                            <p class="author">by <%= item.author %></p>
+                            <div class="note-actions">
+                                <button class="view-book" onclick="redirectToBook('<%= item.id %>')"> >> View Book </button> <!-- View Book Button -->
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p>No archived notes available.</p>
+                <% } %>
+            </div>
+            
+            
+        </div>
+
+        <button id="addNote" class="add-note">+ Add New Book Note</button>
+    </div>
+
+    
+    <script src="js/dashboard.js"></script>
+    <script>
+        function redirectToBook(postId) {
+            window.location.href = `/book?post_id=${postId}`; // Redirect to the book page with the post_id
+        }
+        
+        var user = <%- JSON.stringify(user || null) %>;
+        var archives = <%- JSON.stringify(archives || []) %>; // Changed to archives for clarity
+    
+        if (!user || archives.length === 0) {
+            console.error("User or archives data is missing.");
+        } else {
+            const userId = user.id; // Access user ID from session
+    
+            // The event handling for removing from archive has been removed since it is no longer needed.
+        }
+
+        function confirmDelete(button) {
+            const postId = button.getAttribute('data-post-id');
+            const confirmed = confirm('Are you sure you want to delete this note?');
+            
+            if (confirmed) {
+                fetch('/delete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id: postId }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Note deleted successfully.');
+                        location.reload(); // Reload the page to reflect the changes
+                    } else {
+                        alert('Error: ' + data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while deleting the note.');
+                });
+            }
+        }
+        
+        function updateNote(noteId) {
+            window.location.href = "/update?noteId=" + noteId; // This sends a GET request to the update route
+        }
+        
+    </script>
+    
+    
+    
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quillora - Search Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/search.css">
+</head>
+<body class="bg-dark text-white">
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <button id="go-back" class="btn btn-outline-light" onclick="history.back()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+                Go Back
+            </button>
+            <h1 class="display-4">Search Results</h1>
+            <div style="width: 100px;"></div> <!-- Placeholder for alignment -->
+        </div>
+        
+        <div class="mb-5">
+            <div class="input-group">
+                <input type="text" id="search-input" class="form-control bg-dark text-white border-secondary" placeholder="Search" value="Example search query">
+                <button id="search-button" class="btn btn-outline-secondary" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="card-container">
+            <% if (results && results.length > 0) { %>
+                <% results.forEach(function(item) { %>
+                    <div class="book-card" data-post-id="<%= item.post_id %>">
+                        <% if (item.cover_image) { %>
+                            <img 
+                            src="data:image/jpeg;base64,<%= item.cover_image.toString('base64') %>" 
+                            alt="<%= item.title %> cover" 
+                            class="book-image">
+                        <% } else { %>
+                            <img 
+                            src="assets/none.jpg" 
+                            alt="Default book cover" 
+                            class="book-image">
+                        <% } %>
+                        
+                        <div class="book-info">
+                            <h3><%= item.title %></h3>
+                            <p class="notes">Notes by <%= item.user_name %></p>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <div class="alert alert-warning" role="alert">
+                    No results found for your search.
+                </div>
+            <% } %>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.card-container').addEventListener('click', function(e) {
+                if (e.target.closest('.book-card')) {
+                    const postId = e.target.closest('.book-card').getAttribute('data-post-id');
+                    if (postId) {
+                        window.location.href = `/book?post_id=${postId}`;
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

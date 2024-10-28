@@ -1,0 +1,157 @@
+body, header {
+    margin: 0;
+    padding: 0;
+}
+
+
+header {
+    text-align: center;
+    background-color: #f4f4f4; 
+    padding: 10px 0; 
+}
+
+.quotes{
+ font-family:'Montserrat Alternates', sans-serif;
+}
+
+.image-section {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+
+.image-section img {
+    width: 100%; 
+    height: auto; 
+    display: block; 
+
+}
+
+
+.text-overlay {
+    position: absolute;
+    bottom: 20px; 
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 30px; 
+    background: rgba(0, 0, 0, 0.5); 
+    padding: 10px;
+}
+
+.Recently-posted {
+    background-image: url('../assets/home2.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+    height: 100vh; 
+    color: white; 
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.recent-title h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: left;
+    padding-left: 10px;
+    font-family: 'Montserrat';
+}
+
+.slider-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.card-container {
+    display: flex;
+    overflow: hidden;
+    overflow-x: scroll;
+    width: 100%;
+    padding: 20px;
+}
+
+.book-card {
+    background-color: rgba(0, 0, 0, 0.5); 
+    padding: 15px;
+    border-radius: 10px;
+    width: 280px; 
+    margin-right: 15px; 
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    justify-content: space-between;
+    transition: transform 0.3s ease-in-out; 
+    min-width: 300px; 
+    
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.book-card:hover {
+    transform: scale(1.05); 
+}
+
+.book-image {
+    width: 250px;       
+    height: 400px;      
+    object-fit: cover;   
+    object-position: center;  
+    border-radius: 8px;   
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+}
+
+.book-info {
+    margin-top: 10px;
+    color: white;
+}
+
+.book-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.notes {
+    font-size: 0.9rem;
+    text-align: right;
+    color: lightgray;
+}
+
+.arrow {
+    font-size: 2rem;
+    color: white;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.left-arrow {
+    left: 10px;
+}
+
+.right-arrow {
+    right: 10px;
+}
+
+.ml2 {
+    font-weight: 550;
+    font-size: 1.6em;
+    font-family: 'Montserrat Alternates';
+  }
+  
+  .ml2 .letter {
+    display: inline-block;
+    line-height: 1em;
+  }
+

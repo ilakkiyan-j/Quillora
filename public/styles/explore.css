@@ -1,0 +1,38 @@
+body {
+    background-image: url('../assets/explore.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    color: white;
+}
+
+.explore-container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.search-bar {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.transparent-card {
+    background-color: rgba(0, 0, 0, 0.7); /* Dark translucent background */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.transparent-card h2 {
+    color: #ddd;
+}
+
+.btn-outline-light {
+    border: 1px solid #bbb;
+    color: #bbb;
+}
+
+.btn-outline-light:hover {
+    background-color: #bbb;
+    color: #000;
+}

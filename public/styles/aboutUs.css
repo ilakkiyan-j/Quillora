@@ -1,0 +1,99 @@
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+.about-section {
+    background: url('../assets/aboutUs.jpg') no-repeat center center/cover; 
+    color: white;
+    position: relative;
+    z-index: 1;
+    padding: 50px 0;
+}
+
+.about-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); 
+    z-index: -1;
+}
+
+/* Flex container to keep elements in a single row */
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 20px; /* Adds space between the columns */
+    flex-wrap: nowrap; /* Prevents wrapping to the next row */
+}
+
+.col-md-4 {
+    flex: 1; /* Ensures equal width for each column */
+    max-width: 32%; /* Ensure equal width for all columns */
+}
+
+/* Flexbox to center content vertically and horizontally inside each info-box */
+.info-box {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    min-height: 350px; /* Ensures equal height for all boxes */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically centers content */
+    align-items: center; /* Horizontally centers content */
+    text-align: center; /* Ensures the text is centered */
+}
+
+.info-box h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.info-box p, .info-box ul {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.info-box ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.info-box ul li {
+    margin-bottom: 8px;
+}
+
+.info-box:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-10px);
+}
+
+.footer {
+    background-color: #000;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.footer p {
+    margin: 0;
+}
+
+.social-icons a {
+    color: white;
+    font-size: 1.5rem;
+}
+
+.social-icons a:hover {
+    color: #007bff;
+}
+
+.logo{
+    font-family: Montagu-slab;
+    color: #FFFFFF;
+}

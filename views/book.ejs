@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= book.book_name %> - Book Review</title>
+    <link rel="stylesheet" href="styles/book.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <button id="backButton" class="btn-back" onclick="history.back()">← Back</button>
+    <div class="container">
+        <h1 class="title"><%= book.title%></h1>
+        <div class="card">
+            <div class="card-header">
+                <div class="header-content">
+                    <!-- Display book cover image -->
+                    <div class="book-cover" style="background-image: url('data:image/jpeg;base64,<%= book.cover_image.toString('base64') %>');"></div>
+
+                    <div class="book-info">
+                        <div class="book-meta">
+                            <!-- Book Title -->
+                            <h2 class="book-title"><%= book.book_name %></h2>
+                            <!-- Author -->
+                            <p class="book-author">by <%= book.author %></p>
+                            <!-- Genres/Badges -->
+                            <div class="badges">
+                                <% for (let genre of book.genre) { %>
+                                    <span class="badge"><%= genre %></span>
+                                <% } %>
+                            </div>
+                            <!-- ISBN -->
+                            <p class="isbn">ISBN: <%= book.isbn %></p>
+                            <!-- Reviewer and Rating -->
+                            <p class="reviewer">Review by: John Smith</p>
+                            <p class="rating">⭐ <%= book.rating %>/10</p>
+                        </div>
+                        <!-- Buy Now Button -->
+                        <a href="<%= book.book_link %>" class="btn-link" target="_blank">
+                            <button class="btn-buy">
+                                <i class="shopping-cart-icon"></i> Buy Now
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary Section -->
+            <div class="card-content">
+                <h3 class="section-title">Summary</h3>
+                <p class="summary-text">
+                    <%= book.summary %>
+                </p>
+                <hr class="separator">
+                <!-- Reader's Notes Section -->
+                <h3 class="section-title">Reader's Notes</h3>
+                <div class="scroll-area">
+                    <div class="notes">
+                        <p>
+                            <%= book.notes %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Section -->
+            <div class="card-footer">
+                <button class="btn-outline" id="toggle-reading-list">
+                    <i class="bookmark-icon"></i>
+                    <span id="button-text">
+                        <% if (book.saved_by && book.saved_by.includes(user.id)) { %>
+                            Remove from Reading List
+                        <% } else { %>
+                            Add to Reading List
+                        <% } %>
+                    </span>
+                </button>
+
+                <p class="last-updated">Last updated: <%= book.last_updated %></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var user = <%- JSON.stringify(user || null) %>;
+        var book = <%- JSON.stringify(book || null) %>;
+    
+        if (!user || !book) {
+            console.error("User or book data is missing.");
+        } else {
+            const userId = user.id; // Access user ID from session
+            const postId = book.post_id;
+            let isSaved = Array.isArray(book.saved_by) && book.saved_by.includes(userId);
+            
+            console.log("User Id: " + userId + " Post Id: " + postId);
+            
+            $('#toggle-reading-list').click(function() {
+                const action = isSaved ? 'remove' : 'add';
+                $.ajax({
+                    url: `/reading-list/${action}`,
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ postId }), // Only include postId; userId is taken from session
+                    success: function(response) {
+                        isSaved = !isSaved;
+                        $('#button-text').text(isSaved ? 'Remove from Reading List' : 'Add to Reading List');
+                    },
+                    error: function(err) {
+                        console.error("Error:", err);
+                        alert('Something went wrong. Please try again later.');
+                    }
+                });
+            });
+        }
+    </script>
+    
+    
+</body>
+</html>

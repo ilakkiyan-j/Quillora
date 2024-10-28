@@ -1,0 +1,171 @@
+/* Global styles */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    padding: 20px;
+}
+
+/* Container */
+.container {
+    max-width: 800px; /* Restrict max-width */
+    margin: 0 auto;   /* Center the container */
+    padding: 20px;
+}
+
+/* Card */
+.card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 20px;
+}
+
+/* Card Header */
+.card-header {
+    display: flex;
+    align-items: flex-start;
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 20px;
+}
+
+.header-content {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Book Cover */
+.book-cover {
+    width: 250px;
+    height:     320px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Book Info */
+.book-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.book-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Badges */
+.badges {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.badge {
+    background-color: #e0e0e0;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+/* Buy Button */
+.btn-buy {
+    padding: 10px 20px;
+    background-color: #024950;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.btn-buy:hover {
+    background-color: #013b40;
+}
+
+/* Card Content */
+.card-content {
+    padding: 20px 0;
+}
+
+.section-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.scroll-area {
+    height: 200px;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+/* Card Footer */
+.card-footer {
+    border-top: 1px solid #eaeaea;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: #024950;
+    border: 2px solid #024950;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-outline:hover {
+    background-color: #024950;
+    color: white;
+}
+
+/* Miscellaneous */
+.last-updated {
+    font-size: 12px;
+    color: #777;
+}
+
+.separator {
+    margin: 20px 0;
+    border: 0;
+    height: 1px;
+    background-color: #e0e0e0;
+}
+
+.btn-back {
+    padding: 10px 15px;
+    background-color: #024950;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-back:hover {
+    background-color: #013b40;
+}
+
+.btn-back i {
+    margin-right: 8px;
+}

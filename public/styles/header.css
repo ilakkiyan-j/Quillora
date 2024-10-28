@@ -1,0 +1,32 @@
+
+.header{
+  background-color: #003135;
+}
+
+.nav-items{
+    color: #FFFFFF;
+}
+
+.nav-link{
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: 1 rem;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #FFD700; 
+}
+
+.logo{
+    font-family: Montagu-slab;
+    color: #FFFFFF;
+}
+
+#profile-pic {
+    width: 50px; /* Ensure equal width and height */
+    height: 50px; /* Equal height */
+    object-fit: cover; /* Maintain aspect ratio and ensure image covers the entire space */
+    border-radius: 50%; /* Make the image round */
+}
+
+

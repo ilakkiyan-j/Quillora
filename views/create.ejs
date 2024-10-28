@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Book Notes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #fff;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-image: url('../assets/create.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+
+        }
+        h1 {
+            color: #fff;
+            text-align: center;
+        }
+        form {
+            background-color: #1f1f1f;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #fff;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        input[type="url"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            background-color: #2c2c2c;
+            color: #fff;
+            box-sizing: border-box;
+        }
+        input[type="file"] {
+            margin-top: 5px;
+        }
+        button {
+            background-color: #3498db;
+            color: #ffffff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .genre-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .genre-tag {
+            background-color: #383a3aea;
+            color: #FFF;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 150px;
+            height: 40px; /* This limits the tag to a rectangular shape */
+            font-size: 14px;
+            position: relative; /* Helps with positioning the X */
+        }
+        
+        .genre-tag span {
+            margin-left: 10px; /* Moves the text to give space between the X and the text */
+            font-size: 16px;
+        }
+        
+        .genre-tag button {
+            background-color: transparent;
+            border: none;
+            color: #FFF;
+            cursor: pointer;
+            font-size: 18px;
+            margin-left: 10px;
+            padding: 0;
+            position: absolute;
+            right: 10px; /* Aligns the X button to the far right */
+        }
+        
+        .genre-tag button:hover {
+            color: #ff4b4b;
+        }
+        
+        .cover-preview {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .cover-preview img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        button {
+            background-color: #3498db;
+            color: #ffffff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            margin-right: 10px; /* Add some space between buttons */
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Create New Book Notes</h1>
+    <form id="bookNotesForm" method="POST" action="/create" enctype="multipart/form-data">
+        <!-- Cover Image Upload and Preview -->
+        <div class="cover-preview">
+            <img id="coverImagePreview" src="default-cover.png" alt="Cover Image" style="width: 200px; height: auto;">
+        </div>
+    
+        <label for="coverImage">Upload Cover Image:</label>
+        <input type="file" id="coverImage" name="coverImage" accept="image/*" onchange="previewCoverImage(event)">
+    
+        <!-- Other form fields -->
+        <label for="title">Title of Your Notes:</label>
+        <input type="text" id="title" name="title" required>
+    
+        <label for="bookName">Book Name:</label>
+        <input type="text" id="bookName" name="bookName" required>
+    
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" required>
+    
+        <label for="isbn">ISBN:</label>
+        <input type="text" id="isbn" name="isbn">
+    
+        <label for="genre">Genres:</label>
+        <input type="text" id="genre" name="genre">
+        <button type="button" onclick="addGenre()">Add Genre</button>
+        <div id="genreContainer" class="genre-container"></div>
+    
+        <label for="lastUpdated">Last Updated:</label>
+        <input type="date" id="lastUpdated" name="lastUpdated" required>
+    
+        <label for="rating">Rating (out of 10):</label>
+        <input type="number" id="rating" name="rating" min="0" max="10" step="0.1" required>
+    
+        <label for="bookLink">Book Link:</label>
+        <input type="url" id="bookLink" name="bookLink">
+    
+        <label for="summary">Summary:</label>
+        <textarea id="summary" name="summary" rows="4" required></textarea>
+    
+        <label for="notes">Notes:</label>
+        <textarea id="notes" name="notes" rows="6" required></textarea>
+    
+        <button type="button" onclick="history.go(-1)">Back</button>
+        <button type="submit">Create Book Notes</button>
+    </form>
+    
+    <script>
+        let genres = [];
+
+function addGenre() {
+    const genreInput = document.getElementById('genre');
+    const genre = genreInput.value.trim();
+    if (genre && !genres.includes(genre)) {
+        genres.push(genre);
+        updateGenreDisplay();
+        genreInput.value = ''; // Clear the input after adding
+    }
+}
+
+function removeGenre(genre) {
+    genres = genres.filter(g => g !== genre);
+    updateGenreDisplay();
+}
+
+function updateGenreDisplay() {
+    const container = document.getElementById('genreContainer');
+    container.innerHTML = '';
+    genres.forEach(genre => {
+        const tag = document.createElement('div');
+        tag.className = 'genre-tag';
+        const genreText = document.createElement('span');
+        genreText.textContent = genre;
+        const removeBtn = document.createElement('button');
+        removeBtn.textContent = '×';
+        removeBtn.onclick = () => removeGenre(genre);
+        tag.appendChild(genreText);
+        tag.appendChild(removeBtn);
+        container.appendChild(tag);
+    });
+}
+
+function previewCoverImage(event) {
+    const reader = new FileReader();
+    reader.onload = function() {
+        const preview = document.getElementById('coverImagePreview');
+        preview.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+}
+
+document.getElementById('bookNotesForm').onsubmit = function(e) {
+    e.preventDefault();
+
+    // Gather form data
+    const formData = new FormData();
+    formData.append('title', document.getElementById('title').value);
+    formData.append('bookName', document.getElementById('bookName').value);
+    formData.append('author', document.getElementById('author').value);
+    formData.append('isbn', document.getElementById('isbn').value);
+    formData.append('genres', JSON.stringify(genres)); // Send genres as a JSON string
+    formData.append('lastUpdated', document.getElementById('lastUpdated').value);
+    formData.append('rating', document.getElementById('rating').value);
+    formData.append('bookLink', document.getElementById('bookLink').value);
+    formData.append('summary', document.getElementById('summary').value);
+    formData.append('notes', document.getElementById('notes').value);
+    
+    const coverImage = document.getElementById('coverImage').files[0];
+    if (coverImage) {
+        formData.append('coverImage', coverImage); // Add the cover image file
+    }
+
+    // Send the POST request
+    fetch('/create', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json(); // Assuming the server responds with JSON
+    })
+    .then(data => {
+        console.log('Success:', data);
+        // You can redirect or display a success message here
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        // Display an error message to the user
+    });
+};
+
+    </script>
+</body>
+</html>

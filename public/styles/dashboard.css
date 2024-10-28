@@ -1,0 +1,164 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #FFF;
+    background-image: url('../assets/dashboard.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #15bea2;
+    margin-bottom: 20px; /* Added bottom margin for spacing */
+}
+
+h1.white {
+    color: #FFF;
+}
+
+.dashboard {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px; /* Added padding for content spacing */
+}
+
+.profile-card, .note-card, .archived-note-card {
+    background-color:  rgba(0, 0, 0, 0.7); /* Use a light background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    color: #FFF;
+}
+
+.profile-content {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 125px;
+    height: 125px;
+    border-radius: 50%; /* Ensure circular shape */
+    overflow: hidden;
+  
+    padding-right: 10px;
+}
+
+.avatar img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; /* This ensures the image fills the avatar without distortion */
+    display: block; /* Removes any extra space around the image */
+}
+
+
+.profile-info h3 {
+    margin: 0 0 10px 0;
+    color: #00a086; /* Consistent color with headings */
+}
+
+.profile-info p {
+    margin: 5px 0;
+}
+
+.bio {
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: #00a086;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+button:hover {
+    background-color: #008c75;
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.5); /* Consistent background for tabs */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.tab {
+    background-color: #e0fffa;
+    color: #00a086;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.tab.active {
+    background-color: #00a086;
+    color: white;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.note-card h3, .archived-note-card h3 {
+    margin-top: 0;
+    color: #00a086; /* Consistent color for note headings */
+}
+
+.author {
+    font-style: italic;
+    color: #e7e7e7;
+}
+
+.note-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
+
+.note-actions button {
+    margin-left: 10px;
+}
+
+.add-note {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.edit, .delete, .archive {
+    background-color: #f4f4f4;
+    color: #333;
+    border: none; /* Ensure consistent border styles */
+}
+
+.edit:hover, .delete:hover, .archive:hover {
+    background-color: #e0e0e0; /* Hover effect */
+}
+
+.notes-section {
+    background-color: rgba(0, 0, 0, 0.5);  
+    padding: 20px;
+    border-radius: 10px;
+}
