@@ -19,6 +19,9 @@ Quillora is a web application designed for book lovers to create, organize, and 
 - **Bootstrap** - Responsive design framework
 - **Multer** - Middleware for handling file uploads (book covers)
 
+## Preview
+https://www.linkedin.com/posts/ilakkiyan-j_quillora-booknotes-webdevelopment-activity-7256572860171722752-KS4l?utm_source=share&utm_medium=member_desktop
+
 ## Installation
 
 To get started with Quillora, follow these steps:
