@@ -21,7 +21,7 @@ Quillora is a **feature-rich web application** designed for **book lovers** to *
 - 📂 **Multer** – Handles file uploads (e.g., book cover images).  
 
 ## 🌍 Live Preview  
-🔗 **[Check out Quillora in Action](https://www.linkedin.com/posts/ilakkiyan-j_quillora-booknotes-webdevelopment-activity-7256572860171722752-KS4l?utm_source=share&utm_medium=member_desktop)**  
+**[Check out Quillora in Action](https://www.linkedin.com/posts/ilakkiyan-j_quillora-booknotes-webdevelopment-activity-7256572860171722752-KS4l?utm_source=share&utm_medium=member_desktop)**  
 
 ## 🔗 Clone this repository  
 ```bash
