@@ -1,6 +1,6 @@
 // migrations/1723305606000_initial_schema.js
 
-exports.up = (pgm) => {
+export const up = (pgm) =>  {
   // Enable the uuid-ossp extension to generate UUIDs
   pgm.createExtension('uuid-ossp', { ifNotExists: true });
 
@@ -48,7 +48,7 @@ exports.up = (pgm) => {
   });
 };
 
-exports.down = (pgm) => {
+export const down = (pgm) => {
   // Drop tables in reverse order of creation
   pgm.dropTable('posts');
   pgm.dropTable('users');
