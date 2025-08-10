@@ -3,19 +3,21 @@ import bodyParser from "body-parser";
 import pg from "pg";
 import session from 'express-session';
 import multer from "multer";
+import 'dotenv/config'; 
 
 const app = express();
 app.use(express.json());
-const port = 3000;
+const port = process.env.PORT || 3000;
 
+const isProduction = process.env.NODE_ENV === "production";
 // Setup PostgreSQL Client
-const db = new pg.Client({
-  user: "postgres",
-  host: "localhost",
-  database: "Quillora",
-  password: "admin",
-  port: 5432,
-});
+const connectionConfig = {
+  connectionString: process.env.DATABASE_URL,
+  // Use SSL in production, but not in local development
+  ssl: isProduction ? { rejectUnauthorized: false } : false
+};
+
+const db = new pg.Client(connectionConfig);
 
 db.connect();
 
@@ -115,6 +117,17 @@ app.post("/auth", async (req, res) => {
     res.status(500).send("An error occurred. Please try again.");
     
   }
+});
+
+//SignOut handling
+app.post("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Error during logout:", err);
+      return res.status(500).send("An error occurred during logout.");
+    }
+    res.redirect("/");
+  });
 });
 
 // Sign Up page

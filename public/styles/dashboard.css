@@ -40,6 +40,13 @@ h1.white {
     margin-bottom: 15px;
 }
 
+.profile-actions{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px; /* Added margin for spacing */
+    gap: 10px; /* Added gap between buttons */
+}
+
 .avatar {
     display: flex;
     align-items: center;

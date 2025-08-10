@@ -28,9 +28,14 @@
                 </div>
             </div>
             <p class="bio"><%= user ? user.bio : 'No bio available' %></p>
+           <div class="profile-actions">
             <form action="/edit" method="get" style="display: inline;">
             <button class="edit-profile" <%= user ? '' : 'disabled' %>>Edit Profile</button>
-        </form>
+            </form>
+            <form action="/logout" method="POST" >
+            <button type="submit">Logout</button>
+            </form>
+            </div>
         </div>
         
 
