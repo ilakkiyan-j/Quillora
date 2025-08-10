@@ -380,6 +380,7 @@ app.post('/create', upload.single('coverImage'), async (req, res) => {
     );
 
     res.status(201).json({ message: 'Book note created successfully!' });
+    
   } catch (error) {
     console.error('Error saving book note:', error);
     res.status(500).json({ message: 'Error saving book note' });
